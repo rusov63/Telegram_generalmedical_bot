@@ -1,32 +1,51 @@
 import asyncio
 import logging
-import sys
 
-from aiogram import Bot, Dispatcher
+import bot_start
+from app import echo
+from app.anesthetic_risk.handlers import handler_anest
+from app.blood_donor.handlers import handler_donor
+from app.skf.handlers import handler_skf
 
-from config import TOKEN
-#from app.handlers import start_bot, get_my_id, get_text, get_document, echo
-from command_start import start_router
+from config import dp, bot
+
+from aiogram.types import BotCommand, BotCommandScopeDefault
 
 
+async def set_commands():
+    """Командное меню. Дефолтное значение"""
 
-# является основной функцией запросф на сервер ТГ, и обновляет информацию если есть новые сообщения
+    commands = [BotCommand(command='/start', description='Старт'),
+                BotCommand(command='/anesthetic_risk', description='Оценка операционно-анастезиологического риска'),
+                BotCommand(command='/skf', description='Cкорость клубочковой фильтрации'),
+                BotCommand(command='/donor', description='Подбор донора крови')]
+    await bot.set_my_commands(commands, BotCommandScopeDefault())
+
+
 async def main():
-    bot = Bot(token=TOKEN)
-
-    dp = Dispatcher()
-
+    # регистрация роутеров
     dp.include_routers(
-        start_router,
+        bot_start.user_router,  # команда /start
+
+        handler_anest.anesthesia_router,  # команда /anesthetic risk
+
+        handler_skf.skf_router,  # команда /skf
+
+        handler_donor.donor_router,  # команда /donor
+
+        echo.echo_router  # неизвестная команда
     )
 
     await dp.start_polling(bot)
 
+    await set_commands()  # Командное меню.
+
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO, stream=sys.stdout) # в терминале выводит ход работы/запросы ТГ бота
+    # в терминале выводит ход запросов/работы бота
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    logger = logging.getLogger(__name__)
     if True:
         asyncio.run(main())
     elif False:
         print("exit")
-
