@@ -6,7 +6,8 @@
 #### Информация о боте
 
  - Oбщемедицинский бот, адрес - https://t.me/generalmedical_bot
- - QR-код - 
+ - QR-код
+
 ![photo.png](image%2Fphoto.png)
 
 #### Телеграм бот содержит 3 приложения:
