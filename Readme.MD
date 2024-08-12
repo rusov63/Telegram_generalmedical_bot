@@ -6,9 +6,7 @@
 #### Информация о боте
 
  - Oбщемедицинский бот, адрес - https://t.me/generalmedical_bot
- - QR-код
-
-![photo.png](image%2Fphoto.png)
+ - QR-код - [photo.png](image%2Fphoto.png)
 
 #### Телеграм бот содержит 3 приложения:
  - Оценка (классификация) операционно-анестезиологический риска. Для запуска приложения внутри бота нажмите команду 
@@ -19,17 +17,10 @@
    /donor
  - Скорость инфузии: в разработке.
  - 
-![img.png](image%2Fimg.png)
+[img.png](image%2Fimg.png)
 
 
 #### Стэк
 - Python 3.11, aiogram==3.10, asyncpg, asyncpg-lite, psycopg2-binary, python-dotenv, SQLAlchemy,
   PostgreSQL
-
-
-
-##### Остались вопросы? Пишите автору проекта
-
-+ rusov63@yahoo.com
-+ https://t.me/rusov63
 
