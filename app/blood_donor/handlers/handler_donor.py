@@ -43,7 +43,7 @@ async def operate_with_data(message: types.Message, state: FSMContext):
     """
     await message.bot.send_chat_action(chat_id=message.from_user.id,
                                        action=ChatAction.TYPING)  # отображает то, что бот печатает.
-    await asyncio.sleep(0.3)  # время отображения ответа бота.
+    await asyncio.sleep(1)  # время отображения ответа бота.
 
     await state.update_data(get_user=message.text)  # сохраняем информацию присланное пользователем.
     data = await state.get_data()  # сохраненная информация была выведена через ключ-индекс.
