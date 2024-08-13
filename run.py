@@ -16,7 +16,7 @@ async def set_commands():
     """Командное меню. Дефолтное значение"""
 
     commands = [BotCommand(command='/start', description='Старт'),
-                BotCommand(command='/anesthetic_risk', description='Оценка операционно-анастезиологического риска'),
+                BotCommand(command='/anesthetic_risk', description='Оценка операционно- анестезиологического риска'),
                 BotCommand(command='/skf', description='Cкорость клубочковой фильтрации'),
                 BotCommand(command='/donor', description='Подбор донора крови')]
     await bot.set_my_commands(commands, BotCommandScopeDefault())

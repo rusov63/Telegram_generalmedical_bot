@@ -16,7 +16,7 @@ async def get_table_donor(recipient: str, table_name='donor') -> None or str:
                  'ccDweakEE', 'CwcddEe', 'CwcDEE', 'kk', 'Kk', 'KK')
 
     if recipient not in RESIPIENT:
-        return f'<b>Ошибка, повторите еще раз!</b>'
+        return f'<b>Ошибка, такой фенотип не существует!</b>'
 
     else:
         async with db_manager:
@@ -28,10 +28,10 @@ async def get_table_donor(recipient: str, table_name='donor') -> None or str:
         recipient_list = sum([list(d.values()) for d in info], [])  # из вложенного списка
         # превращаем в обычный список
 
-        return (f'Cовместимый, фенотип: \n'
+        return (f'Cовместимый фенотип: \n'
                 f'<b>{recipient_list[0]}</b> \n'
                 f'\n'
-                f'При экстренных показаниях к трансфузии (переливанию) допустим, фенотип: \n'
+                f'При экстренных показаниях к трансфузии (переливанию): \n'
                 f'<b>{recipient_list[1]}</b>')
 
 #recipient = 'CcDee'

@@ -9,6 +9,6 @@ def kb_skf() -> ReplyKeyboardMarkup:
     keyboard = ReplyKeyboardMarkup(
         keyboard=[[KeyboardButton(text="Женский"), KeyboardButton(text="Мужской")]],
 
-        input_field_placeholder='Gender: Male - Female', resize_keyboard=True, one_time_keyboard=True)
+        input_field_placeholder='Пол: Женский - Мужской', resize_keyboard=True, one_time_keyboard=True)
 
     return keyboard

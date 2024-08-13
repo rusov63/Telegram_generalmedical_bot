@@ -31,7 +31,7 @@ async def start_Read_user_dataPatient(message: types.Message, state: FSMContext)
     """
     await state.set_state(Reg.patient)  # Установка состояния Reg.patient.
 
-    await message.answer(f'Выбрали: оценка операционно-анастезиологического риска (MHOAP-89)')
+    await message.answer(f'Выбрали: оценка операционно-анестезиологического риска (MHOAP-89)')
     await message.answer(f'Выберите состояние больного: ', reply_markup=kb_patient())
 
 
