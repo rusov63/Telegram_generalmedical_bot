@@ -16,7 +16,7 @@ async def get_table_donor(recipient: str, table_name='donor') -> None or str:
                  'ccDweakEE', 'CwcddEe', 'CwcDEE', 'kk', 'Kk', 'KK')
 
     if recipient not in RESIPIENT:
-        return f'<b>Ошибка, повторите еще раз!</b>'
+        return f'<b>Ошибка, такой фенотип не существует!</b>'
 
     else:
         async with db_manager:
