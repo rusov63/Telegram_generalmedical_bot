@@ -27,7 +27,7 @@ async def cmd_skf(message: types.Message, state: FSMContext):
     """
     await state.set_state(Reg.gender)
 
-    await message.answer(f'Вы выбрали: скорость клубочковой фильтрации (CKD-EPI)')
+    await message.answer(f'Выбрали: скорость клубочковой фильтрации (CKD-EPI)')
     await message.answer(f'Выберите пол: ', reply_markup=kb_skf())
 
 
