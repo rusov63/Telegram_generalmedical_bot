@@ -22,7 +22,7 @@ def get_operate_patient(patient: str) -> int or float:
         return 6
 
 
-def get_operate_operation(operation: str)-> int or float:
+def get_operate_operation(operation: str) -> int or float:
     """
     Функция принимает от пользователя ответ (data['operation']),
     сравнивает по условию и возвращает балл
