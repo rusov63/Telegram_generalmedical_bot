@@ -14,6 +14,8 @@ def calculate_hypotension(user):
     """
 
     total = ''.join(i for i in user if i.isnumeric())
+
+
     if total == '':
         points = 0
     elif total == '70':

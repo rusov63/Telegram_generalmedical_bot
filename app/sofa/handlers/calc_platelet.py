@@ -22,7 +22,7 @@ def calculation_platelet(platelet: str) -> int:
 
     # Определяем количество баллов в зависимости от количества тромбоцитов
     if total >= 151:
-        point = 7
+        point = 0
     elif 101 < total <= 150:
         point = 1
     elif 51 < total <= 100:
