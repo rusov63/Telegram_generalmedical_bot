@@ -23,27 +23,53 @@ def total_result_functions(total_PaoFio, total_respiratory,
                           total_platelet + total_liver +
                           total_kidney + total_hypotension +
                           total_EyeVerbalMotor)
+    print(total_functions)
 
     if 0 <= total_functions <= 6:
-        return (f'<b>Баллов: {total_functions}</b>\n'
+        points = (f'<b>Баллов: {total_functions} </b>\n'
                 f'<b>Смертность: < 10% </b>')
 
     elif 7 <= total_functions <= 9:
-        return (f'<b>Баллов: {total_functions}</b>\n'
+        points = (f'<b>Баллов: {total_functions} </b>\n'
                 f'<b>Смертность: 15-20% </b>')
 
     elif 10 <= total_functions <= 12:
-        return (f'<b>Баллов: {total_functions}</b>\n'
+        points = (f'<b>Баллов: {total_functions} </b>\n'
                 f'<b>Смертность: 40-50% </b>')
 
     elif 13 <= total_functions <= 14:
-        return (f'<b>Баллов: {total_functions}</b>\n'
+        points = (f'<b>Баллов: {total_functions} </b>\n'
                 f'<b>Смертность: 50-60% </b>')
 
     elif total_functions == 15:
-        return (f'<b>Баллов: {total_functions}</b>\n'
+        points = (f'<b>Баллов: {total_functions} </b>\n'
                 f'<b>Смертность: > 80% </b>')
 
     elif 16 <= total_functions <= 24:
-        return (f'<b>Баллов: {total_functions}</b>\n'
+        points = (f'<b>Баллов: {total_functions} </b>\n'
                 f'<b>Смертность: > 90% </b>')
+
+    else:
+        points = '<b>Ошибка, повторите еще раз!</b>'
+
+
+    if total_functions <= 12:
+        text_points = (f'<b>Множественные органные дисфункции</b>')
+
+    elif 13 <= total_functions <= 17:
+        text_points = (f'<b>Переход дисфункции в недостаточность</b>')
+
+    elif 18 <= total_functions <= 24:
+        text_points = (f'<b>Высокая вероятность летального исхода</b>')
+
+    else:
+        text_points = '<b>Ошибка, повторите еще раз!</b>'
+
+
+    if points == text_points:
+        return '<b>Ошибка, повторите еще раз!</b>'
+    else:
+        return f'{points}\n{text_points}'
+#  При сумме баллов не более 12 предполагаются множественные органные дисфункции,
+#  13—17 баллов — предполагается переход дисфункции в недостаточность,
+#  сумма баллов около 24 указывает на высокую вероятность летального исхода.
