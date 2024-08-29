@@ -5,6 +5,26 @@ from app.sofa.handlers.calc_EyeVerbalMotor import calculation_Eye_response, calc
 
 
 class TestCalculationEyeResponse(unittest.TestCase):
+    """
+    Тестирование функций расчета реакций на глазные, вербальные и моторные стимулы.
+
+    Модуль содержит классы тестов для проверки корректности работы следующих функций:
+    - calculation_Eye_response: оценивает реакцию глаз на различные стимулы.
+    - calculation_Verbal_response: оценивает вербальные реакции.
+    - calculation_Motor_response: оценивает моторные реакции.
+    - final_calculation_EyeVerbalMotor: вычисляет итоговый результат на основе оценок глазных, вербальных и моторных реакций.
+
+    Каждый класс тестов наследует unittest.TestCase и включает в себя методы, которые проверяют различные сценарии, включая корректные и некорректные входные данные.
+
+    Примеры тестируемых случаев:
+    - Открытие глаз в ответ на различные стимулы (самопроизвольно, на голос, на боль и т.д.).
+    - Вербальные реакции (осмысленные ответы, бессвязная речь и т.д.).
+    - Моторные реакции (выполнение движений, локализация боли и т.д.).
+    - Итоговая оценка на основе трех категорий реакций.
+
+    Для запуска тестов используйте команду:
+    python -m unittest -v app/sofa/tests/tests_calc_EyeVerbalMotor.py
+    """
 
     def test_open_spontaneously(self):
         self.assertEqual(calculation_Eye_response('Открывает самопроизвольно, наблюдает'), 4)
@@ -63,17 +83,14 @@ class TestCalculation_Motor_response(unittest.TestCase):
         self.assertEqual(calculation_Motor_response('Не двигается'), 1)
 
 
-
 class TestFinal_calculation_EyeVerbalMotor(unittest.TestCase):
 
     def test_Result(self):
-        # Тестируем корректные значения
-        self.assertEqual(final_calculation_EyeVerbalMotor(1, 1, 1), 3)
-        self.assertEqual(final_calculation_EyeVerbalMotor(2, 2, 2), 6)
-        self.assertEqual(final_calculation_EyeVerbalMotor(3, 3, 3), 9)
-        # Тестируем крайние значения
-        self.assertEqual(final_calculation_EyeVerbalMotor(4, 4, 4), 12)
-        self.assertEqual(final_calculation_EyeVerbalMotor(4, 5, 6), 15)
+        self.assertEqual(final_calculation_EyeVerbalMotor(2, 1, 2), 4)
+        self.assertEqual(final_calculation_EyeVerbalMotor(2, 3, 2), 3)
+        self.assertEqual(final_calculation_EyeVerbalMotor(4, 4, 3), 2)
+        self.assertEqual(final_calculation_EyeVerbalMotor(5, 3, 5), 1)
+        self.assertEqual(final_calculation_EyeVerbalMotor(5, 5, 5), 0)
 
     def test_TypeError(self):
         # Тестируем некорректные значения, неправильный тип
@@ -81,10 +98,3 @@ class TestFinal_calculation_EyeVerbalMotor(unittest.TestCase):
             self.assertEqual(final_calculation_EyeVerbalMotor('a', 1, 1))
 
 
-
-
-if __name__ == '__main__':
-    unittest.main()
-
-#для тестирование из терминала используем команду
-#python -m unittest -v app/sofa/tests/tests_calc_EyeVerbalMotor.py
