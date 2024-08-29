@@ -112,18 +112,36 @@ def calculation_Motor_response(motor_response: str) -> int:
 
 def final_calculation_EyeVerbalMotor(eye_response: int, verbal_response: int, motor_response: int) -> int:
     """
-    Вычисляет общий результат на основе глазного (eye_response), вербального (verbal_response)
-     и моторного ответов (motor_response).
+    Функция для вычисления итогового балла на основе ответов на глазные, вербальные и моторные реакции.
 
-    :argument
-    eye_response (int): Оценка глазного ответа (от 1 до 4).
-    verbal_response (int): Оценка вербального ответа (от 1 до 5).
-    motor_response (int): Оценка моторного ответа (от 1 до 6).
+    Параметры:
+    eye_response (int): Оценка глазной реакции (целое число).
+    verbal_response (int): Оценка вербальной реакции (целое число).
+    motor_response (int): Оценка моторной реакции (целое число).
 
-    :return int - Сумма всех трех ответов, представляющая общий результат.
+    Возвращает:
+    int: Итоговый балл, который определяется по сумме всех реакций:
+        - Если сумма меньше 6, возвращает 4.
+        - Если сумма от 6 до 9 (включительно), возвращает 3.
+        - Если сумма от 10 до 12 (включительно), возвращает 2.
+        - Если сумма от 13 до 14 (включительно), возвращает 1.
+        - Если сумма равна 15, возвращает 0.
     """
     total = int(eye_response + verbal_response + motor_response)
-    return total
+
+    if total < 6:
+        points = 4
+    elif 6 <= total <= 9:
+        points = 3
+    elif 10 <= total <= 12:
+        points = 2
+    elif 13 <= total <= 14:
+        points = 1
+    elif total == 15:
+        points = 0
+
+    return points
+
 
 
 # total = print_result('Произвольное', 'Отсутствие речи', 'Патологическое разгибание в ответ на боль (

@@ -27,9 +27,9 @@ def calculation_platelet(platelet: str) -> int:
         point = 1
     elif 51 < total <= 100:
         point = 2
-    elif 21 < total <= 50:
+    elif 20 <= total <= 50:
         point = 3
-    elif 0 < total <= 20:
+    elif 0 < total < 20:
         point = 4
 
     return point

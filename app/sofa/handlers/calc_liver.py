@@ -24,8 +24,6 @@ def calculation_liver(user: str) -> int:
         points = 3
     elif total == 204:
         points = 4
-    else:
-        points = 0
 
     return points
 
