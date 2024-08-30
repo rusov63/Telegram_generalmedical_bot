@@ -19,8 +19,9 @@
 
 ![img.png](img.png)
 
-
 #### Стэк
+- Проект на 40% покрыт unittest.
+
 - Python 3.12, aiogram==3.10, asyncpg, asyncpg-lite, psycopg2-binary, python-dotenv, SQLAlchemy,
   PostgreSQL, unittest, coverage
 
