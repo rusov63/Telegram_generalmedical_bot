@@ -17,4 +17,4 @@ async def command_start(message: types.Message):
                          f'\n'
                          f'{hbold(' 🩸 Подбор донора крови:  /donor')} \n'
                          f'\n'
-                         f'{hbold(' 💉 Скорость инфузии: в разработке')} \n')
+                         f'{hbold(' ︎💀 Шкала SOFA:  /sofa')} \n')

@@ -1,8 +1,8 @@
 import psycopg2
 
 if True:
-    with psycopg2.connect(user='-----', password="-----", host="------", port="-----",
-                          database="medical") as conn:
+    with psycopg2.connect(user='', password="", host="localhost", port="5432",
+                          database="") as conn:
 
         with conn.cursor() as cur:
             cur.execute("CREATE TABLE donor (id serial primary key, "

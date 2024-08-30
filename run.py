@@ -6,6 +6,7 @@ from app import echo
 from app.anesthetic_risk.handlers import handler_anest
 from app.blood_donor.handlers import handler_donor
 from app.skf.handlers import handler_skf
+from app.sofa.handlers import handler_main
 
 from config import dp, bot
 
@@ -18,7 +19,8 @@ async def set_commands():
     commands = [BotCommand(command='/start', description='Старт'),
                 BotCommand(command='/anesthetic_risk', description='Оценка операционно- анестезиологического риска'),
                 BotCommand(command='/skf', description='Cкорость клубочковой фильтрации'),
-                BotCommand(command='/donor', description='Подбор донора крови')]
+                BotCommand(command='/donor', description='Подбор донора крови'),
+                BotCommand(command='/sofa', description='Шкала SOFA')]
     await bot.set_my_commands(commands, BotCommandScopeDefault())
 
 
@@ -32,6 +34,8 @@ async def main():
         handler_skf.skf_router,  # команда /skf
 
         handler_donor.donor_router,  # команда /donor
+
+        handler_main.sofa_router,  # команда /sofa
 
         echo.echo_router  # неизвестная команда
     )
