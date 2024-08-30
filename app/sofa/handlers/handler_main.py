@@ -182,11 +182,10 @@ async def write_user_motor(message: types.Message, state: FSMContext):
                                         total_kidney, total_hypotension,
                                         total_EyeVerbalMotor)
 
-    await message.answer(f'Дыхание = {total_PaoFio}, Респираторная = {total_respiratory}, '
-                         f'тромбоциты = {total_platelet}, Печень = {total_liver}, '
-                         f'креатинин = {total_kidney}, Гипотензия = {total_hypotension},'
-                         f'Глазго = {total_EyeVerbalMotor}')
-
+    # await message.answer(f'Дыхание = {total_PaoFio}, Респираторная = {total_respiratory}, '
+    #                      f'тромбоциты = {total_platelet}, Печень = {total_liver}, '
+    #                      f'креатинин = {total_kidney}, Гипотензия = {total_hypotension},'
+    #                      f'Глазго = {total_EyeVerbalMotor}')
 
 
     await message.answer(f'{final_number}')
@@ -195,5 +194,3 @@ async def write_user_motor(message: types.Message, state: FSMContext):
 
     await message.answer(f'Для возврата запустите команду:  /sofa \n'
                          f'или воспользуйтесь меню')
-
-
