@@ -17,59 +17,57 @@ def total_result_functions(total_PaoFio, total_respiratory,
              Если входные данные некорректны, возвращает сообщение об ошибке.
        """
     if total_PaoFio is None or not isinstance(total_PaoFio, (int, float)):
-        return '<b>Ошибка, повторите еще раз!</b>'
+        return f'<b>Ошибка, повторите еще раз!</b>'
+
 
     total_functions = int(total_PaoFio + total_respiratory +
                           total_platelet + total_liver +
                           total_kidney + total_hypotension +
                           total_EyeVerbalMotor)
-    print(total_functions)
+
+
 
     if 0 <= total_functions <= 6:
-        points = (f'<b>Баллов: {total_functions} </b>\n'
-                f'<b>Смертность: < 10% </b>')
+        points = f'<b>Баллов: {total_functions} \nСмертность: &lt; 10%</b>'
 
     elif 7 <= total_functions <= 9:
-        points = (f'<b>Баллов: {total_functions} </b>\n'
-                f'<b>Смертность: 15-20% </b>')
+        points = f'<b>Баллов: {total_functions} \nСмертность: 15-20%</b>'
 
     elif 10 <= total_functions <= 12:
-        points = (f'<b>Баллов: {total_functions} </b>\n'
-                f'<b>Смертность: 40-50% </b>')
+        points = f'<b>Баллов: {total_functions} \nСмертность: 40-50%</b>'
 
     elif 13 <= total_functions <= 14:
-        points = (f'<b>Баллов: {total_functions} </b>\n'
-                f'<b>Смертность: 50-60% </b>')
+        points = f'<b>Баллов: {total_functions} \nСмертность: 50-60%</b>'
 
     elif total_functions == 15:
-        points = (f'<b>Баллов: {total_functions} </b>\n'
-                f'<b>Смертность: > 80% </b>')
+        points = f'<b>Баллов: {total_functions} \nСмертность: &gt; 80%</b>'
 
     elif 16 <= total_functions <= 24:
-        points = (f'<b>Баллов: {total_functions} </b>\n'
-                f'<b>Смертность: > 90% </b>')
+        points = f'<b>Баллов: {total_functions} \nСмертность: &gt; 90%</b>'
 
     else:
-        points = '<b>Ошибка, повторите еще раз!</b>'
+        points = f'<b>Ошибка, повторите еще раз!</b>'
 
 
     if total_functions <= 12:
-        text_points = (f'<b>Множественные органные дисфункции</b>')
+        text_points = f'<b>Множественные органные дисфункции</b>'
 
     elif 13 <= total_functions <= 17:
-        text_points = (f'<b>Переход дисфункции в недостаточность</b>')
+        text_points = f'<b>Переход дисфункции в недостаточность</b>'
 
     elif 18 <= total_functions <= 24:
-        text_points = (f'<b>Высокая вероятность летального исхода</b>')
+        text_points = f'<b>Высокая вероятность летального исхода</b>'
 
     else:
-        text_points = '<b>Ошибка, повторите еще раз!</b>'
+        text_points = f'<b>Ошибка, повторите еще раз!</b>'
 
 
     if points == text_points:
-        return '<b>Ошибка, повторите еще раз!</b>'
+        return f'<b>Ошибка, повторите еще раз!</b>'
+
     else:
         return f'{points}\n{text_points}'
+
 #  При сумме баллов не более 12 предполагаются множественные органные дисфункции,
 #  13—17 баллов — предполагается переход дисфункции в недостаточность,
 #  сумма баллов около 24 указывает на высокую вероятность летального исхода.
