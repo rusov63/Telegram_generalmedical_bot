@@ -22,27 +22,27 @@ class Test_total_result_functions(unittest.TestCase):
 
     def test_MaximumSixPoints(self):
         self.assertEqual(total_result_functions(1, 0, 1, 1, 1, 1, 1),
-                         '<b>Баллов: 6 \nСмертность: &lt; 10%</b>\n<b>Множественные органные дисфункции</b>')
+                         '<b>Баллов: 6 \nСмертность: &lt; 10%</b>')
 
     def test_MaximumSevenPoints(self):
         self.assertEqual(total_result_functions(1, 2, 1, 1, 1, 1, 1),
-                         '<b>Баллов: 8 \nСмертность: 15-20%</b>\n<b>Множественные органные дисфункции</b>')
+                         '<b>Баллов: 8 \nСмертность: 15-20%</b>')
 
     def test_MaximumEightPoints(self):
         self.assertEqual(total_result_functions(2, 2, 1, 2, 1, 1, 2),
-                         '<b>Баллов: 11 \nСмертность: 40-50%</b>\n<b>Множественные органные дисфункции</b>')
+                         '<b>Баллов: 11 \nСмертность: 40-50%</b>')
 
     def test_MaximumFourteenPoints(self):
         self.assertEqual(total_result_functions(3, 3, 3, 2, 1, 1, 1),
-                         '<b>Баллов: 14 \nСмертность: 50-60%</b>\n<b>Переход дисфункции в недостаточность</b>')
+                         '<b>Баллов: 14 \nСмертность: 50-60%</b>')
 
     def test_MaximumFiveteenPoints(self):
         self.assertEqual(total_result_functions(3, 3, 3, 2, 1, 1, 2),
-                         '<b>Баллов: 15 \nСмертность: &gt; 80%</b>\n<b>Переход дисфункции в недостаточность</b>')
+                         '<b>Баллов: 15 \nСмертность: &gt; 80%</b>')
 
     def test_MaximumNineteenPoints(self):
         self.assertEqual(total_result_functions(5, 3, 1, 2, 4, 5, 3),
-                         '<b>Баллов: 23 \nСмертность: &gt; 90%</b>\n<b>Высокая вероятность летального исхода</b>')
+                         '<b>Баллов: 23 \nСмертность: &gt; 90%</b>')
 
     def test_MaximumTwentyFivePoints(self):
         self.assertEqual(total_result_functions(5, 3, 1, 5, 4, 5, 3), '<b>Ошибка, повторите еще раз!</b>')
@@ -55,7 +55,7 @@ class Test_total_result_functions(unittest.TestCase):
 
     def test_edge_cases(self):
         self.assertEqual(total_result_functions(0, 0, 0, 0, 0, 0, 0),
-                         '<b>Баллов: 0 \nСмертность: &lt; 10%</b>\n<b>Множественные органные дисфункции</b>')
+                         '<b>Баллов: 0 \nСмертность: &lt; 10%</b>')
 
         self.assertEqual(total_result_functions(15, 0, 0, 0, 0, 0, 0),
-                         '<b>Баллов: 15 \nСмертность: &gt; 80%</b>\n<b>Переход дисфункции в недостаточность</b>')
+                         '<b>Баллов: 15 \nСмертность: &gt; 80%</b>')
