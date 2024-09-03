@@ -48,25 +48,7 @@ def total_result_functions(total_PaoFio, total_respiratory,
     else:
         points = f'<b>Ошибка, повторите еще раз!</b>'
 
-
-    if total_functions <= 12:
-        text_points = f'<b>Множественные органные дисфункции</b>'
-
-    elif 13 <= total_functions <= 17:
-        text_points = f'<b>Переход дисфункции в недостаточность</b>'
-
-    elif 18 <= total_functions <= 24:
-        text_points = f'<b>Высокая вероятность летального исхода</b>'
-
-    else:
-        text_points = f'<b>Ошибка, повторите еще раз!</b>'
-
-
-    if points == text_points:
-        return f'<b>Ошибка, повторите еще раз!</b>'
-
-    else:
-        return f'{points}\n{text_points}'
+    return f'{points}'
 
 #  При сумме баллов не более 12 предполагаются множественные органные дисфункции,
 #  13—17 баллов — предполагается переход дисфункции в недостаточность,
