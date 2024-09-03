@@ -162,35 +162,74 @@ async def write_user_verbal(message: types.Message, state: FSMContext):
 
 @sofa_router.message(Reg.motor_response)
 async def write_user_motor(message: types.Message, state: FSMContext):
+    """
+    Обрабатывает сообщение от пользователя, сохраняет введенное значение
+    для моторной реакции и выполняет расчеты на основе состояния.
+
+    Параметры:
+    - message (types.Message): Сообщение, содержащее текст от пользователя.
+    - state (FSMContext): Контекст состояния, используемый для хранения
+      и получения данных о состоянии пользователя.
+
+    Описание:
+    Функция сохраняет текст сообщения в состоянии как 'motor_response'.
+    Затем извлекает данные о состоянии, включая значения для
+    различных медицинских показателей (pao2, fio2, respiratory,
+    platelet, liver, creatinin_kidney, hypotension, eye_response,
+    verbal_response). На основе этих данных выполняются расчеты
+    для получения итогового значения, которое затем отправляется
+    пользователю. После этого состояние очищается для подготовки
+    к следующему взаимодействию.
+
+    Возвращает: None.
+    """
+
     await state.update_data(motor_response=message.text)  # Сохраняет введенное пользователем значение motor_response
 
     data = await state.get_data()
 
+    # получение значения Дыхание
     total_PaoFio = calculation_PaoFio(data['pao2'], data['fio2'])
+
+    # получение значения Респиратор
     total_respiratory = calculation_respiratory(data['respiratory'])
+
+    # получение значения тромбоциты
     total_platelet = calculation_platelet(data['platelet'])
+
+    # получение значения Печень
     total_liver = calculation_liver(data['liver'])
+
+    # получение значения Креатинин
     total_kidney = calculation_creatinin(data['creatinin_kidney'])
+
+    # получение значения Гипотензия
     total_hypotension = calculate_hypotension(data['hypotension'])
 
+    # Расчет Шкала комы Глазго:
+    #     eye_response: Открывание глаз.
+    #     verbal_response: Речевая реакция.
+    #     motor_response: Двигательная реакция.
     total_EyeVerbalMotor = final_calculation_EyeVerbalMotor(calculation_Eye_response(data['eye_response']),
                                                  calculation_Verbal_response(data['verbal_response']),
                                                  calculation_Motor_response(data['motor_response']))
 
+    # Финальный расчет, вывод результата
     final_number = total_result_functions(total_PaoFio, total_respiratory,
                                         total_platelet, total_liver,
                                         total_kidney, total_hypotension,
                                         total_EyeVerbalMotor)
 
+    # Вывод результата пользователю
+    await message.answer(f'{final_number}')
+
+    # очистка состояния.
+    await state.clear()
+
+    await message.answer(f'Для возврата запустите команду:  /sofa \n'
+                         f'или воспользуйтесь меню')
+
     # await message.answer(f'Дыхание = {total_PaoFio}, Респираторная = {total_respiratory}, '
     #                      f'тромбоциты = {total_platelet}, Печень = {total_liver}, '
     #                      f'креатинин = {total_kidney}, Гипотензия = {total_hypotension},'
     #                      f'Глазго = {total_EyeVerbalMotor}')
-
-
-    await message.answer(f'{final_number}')
-
-    await state.clear()  # очистка состояния.
-
-    await message.answer(f'Для возврата запустите команду:  /sofa \n'
-                         f'или воспользуйтесь меню')

@@ -15,7 +15,6 @@ def calculate_hypotension(user):
 
     total = ''.join(i for i in user if i.isnumeric())
 
-
     if total == '':
         points = 0
     elif total == '70':
@@ -28,7 +27,6 @@ def calculate_hypotension(user):
         points = 4
 
     return points
-
 
 # total = calculate_hypotension('Нет гипотензии')
 # print(total)
