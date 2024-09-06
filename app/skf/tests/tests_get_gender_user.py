@@ -22,7 +22,7 @@ class Test_get_gender(unittest.TestCase):
 
     def test_get_gender(self):
         self.assertEqual(get_gender('Ошибка'), 'Ошибка')
-        self.assertEqual(get_gender(['Другой гендер']), 'Ошибка')
+        self.assertEqual(get_gender('Другой гендер'), 'Ошибка')
 
     def test_getNone_gender(self):
         self.assertEqual(get_gender('мужской'), 'мужской')
