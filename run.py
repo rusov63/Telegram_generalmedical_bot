@@ -5,7 +5,7 @@ import bot_start
 from app import echo
 from app.anesthetic_risk.handlers import handler_anest
 from app.blood_donor.handlers import handler_donor
-from app.skf.handlers import handler_skf
+from app.skf.handlers import handler_main_skf
 from app.sofa.handlers import handler_main
 
 from config import dp, bot
@@ -35,7 +35,7 @@ async def main():
 
         handler_anest.anesthesia_router,  # команда /anesthetic risk
 
-        handler_skf.skf_router,  # команда /skf
+        handler_main_skf.skf_router,  # команда /skf
 
         handler_donor.donor_router,  # команда /donor
 
