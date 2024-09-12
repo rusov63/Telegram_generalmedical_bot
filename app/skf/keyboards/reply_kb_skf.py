@@ -5,7 +5,7 @@ ONE = ('Женский')
 
 TWO = ('Мужской')
 
-def kb_skf() -> ReplyKeyboardMarkup:
+def reply_skf() -> ReplyKeyboardMarkup:
     """
     Создает клавиатуру для команды /skf.
 

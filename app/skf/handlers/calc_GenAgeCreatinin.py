@@ -53,10 +53,10 @@ def calc_skf(gender: str, age: str, creatinin: str) -> int:
 
 # gender = ('женский')
 # age = int(78)
-# creatinin = int(56)
+# creatinin = int(-1)
 #
 # start_time = time.perf_counter()
-# print(calc_skf(gender, age, creatinin))
+#print(calc_skf(gender, age, creatinin))
 # end_time = time.perf_counter()
 #
 # print(f"Время выполнения: {end_time - start_time:.8f} seconds")
