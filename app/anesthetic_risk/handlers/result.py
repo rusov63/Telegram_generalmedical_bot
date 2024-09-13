@@ -4,17 +4,12 @@ def print_result(operate_patient, operate_operation, operate_character) -> str:
     состояние пациента, операция и характер операции.
 
     :param
-    operate_patient (float или None): Оценка состояния пациента.
-    operate_operation (float или None): Оценка операции.
-    operate_character (float или None): Оценка характера операции.
+    operate_patient (float или int): Оценка состояния пациента.
+    operate_operation (float или int): Оценка операции.
+    operate_character (float или  int): Оценка характера операции.
 
-    :return
-    str: Строка с сообщением о степени риска или ошибке,
-    если один из параметров равен None.
+    :return Строка с сообщением о степени риска.
     """
-
-    if operate_patient is None or operate_operation is None or operate_character is None:
-        return f'<b>Ошибка, повторите еще раз!</b>'
 
     total = int(operate_patient + operate_operation + operate_character)
 

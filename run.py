@@ -3,7 +3,7 @@ import logging
 
 import bot_start
 from app.other_files import echo, feedback_project
-from app.anesthetic_risk.handlers import handler_anest
+from app.anesthetic_risk.handlers import handler_main_anest
 from app.blood_donor.handlers import handler_donor
 from app.skf.handlers import handler_main_skf
 from app.sofa.handlers import handler_main
@@ -35,7 +35,7 @@ async def main():
 
         feedback_project.user_router,  # callback 'Обратная связь'
 
-        handler_anest.anesthesia_router,  # команда /anesthetic risk
+        handler_main_anest.anesthesia_router,  # команда /anesthetic risk
 
         handler_main_skf.skf_router,  # команда /skf
 

@@ -3,7 +3,7 @@ from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 
-from app.anesthetic_risk.keyboards.kb_hypotension import kb_hypotension
+from app.anesthetic_risk.keyboards.keyboard_hypotension import kb_hypotension
 from app.sofa.handlers.calc_EyeVerbalMotor import (calculation_Eye_response, calculation_Verbal_response,
                                                    calculation_Motor_response, final_calculation_EyeVerbalMotor)
 from app.sofa.handlers.calc_hypotension import calculate_hypotension

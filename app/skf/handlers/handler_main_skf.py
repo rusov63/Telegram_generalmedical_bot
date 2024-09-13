@@ -51,7 +51,7 @@ async def cmd_skf(message: types.Message, state: FSMContext):
 
 
 @skf_router.callback_query(F.data == '/skf')
-async def start_skf(callback: CallbackQuery, state: FSMContext):
+async def start_callback(callback: CallbackQuery, state: FSMContext):
     await state.clear()
     await callback.message.answer(f'Выбрали: скорость клубочковой фильтрации для взрослых (CKD-EPI)')
     await callback.answer(f'Cкорость клубочковой фильтрации')

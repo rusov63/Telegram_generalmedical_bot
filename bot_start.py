@@ -39,7 +39,7 @@ async def command(callback: CallbackQuery):
 
 def inline_skf() -> InlineKeyboardMarkup:
     """
-    Создает и возвращает клавиатуру с двумя кнопками:
+    Создает и возвращает клавиатуру с 5 кнопками:
     1. "Оценка опер. анестезиологического риска" - с callback_data '/anesthetic_risk'
     2. "Cкорость клубочковой фильтрации" - с callback_data '/skf'
     3. "Подбор донора крови" - с callback_data '/donor'
@@ -47,8 +47,7 @@ def inline_skf() -> InlineKeyboardMarkup:
     5. "Обратная связь" - с callback_data 'Обратная связь'
 
     Эта клавиатура может быть использована для навигации пользователя в боте
-
-    :return InlineKeyboardMarkup: Объект клавиатуры с четырьмя кнопками.
+    :return InlineKeyboardMarkup: Объект клавиатуры с 5 кнопками.
     """
 
     inline_main = InlineKeyboardMarkup(inline_keyboard=[
