@@ -1,6 +1,7 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-def inline_skf():
+
+def inline_skf() -> InlineKeyboardMarkup:
     """
     Создает и возвращает клавиатуру с двумя кнопками:
     1. "На стартовую" - с callback_data '/start'
@@ -10,12 +11,11 @@ def inline_skf():
     в боте, позволяя ему вернуться на главную страницу или перейти
     обратно к предыдущему меню.
 
-    Возвращает:
-    - InlineKeyboardMarkup: Объект клавиатуры с двумя кнопками.
+    :return: InlineKeyboardMarkup: Объект клавиатуры с двумя кнопками.
     """
     inline_main = InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text='На стартовую', callback_data='/start')],
-        [InlineKeyboardButton(text='Вернуться назад', callback_data='/skf')]
+        [InlineKeyboardButton(text='🚀 На стартовую', callback_data='/start')],
+        [InlineKeyboardButton(text='🔙 Вернуться назад', callback_data='/skf')]
     ])
 
     return inline_main
