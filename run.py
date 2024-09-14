@@ -2,8 +2,8 @@ import asyncio
 import logging
 
 import bot_start
-from app import echo
-from app.anesthetic_risk.handlers import handler_anest
+from app.other_files import echo, feedback_project
+from app.anesthetic_risk.handlers import handler_main_anest
 from app.blood_donor.handlers import handler_donor
 from app.skf.handlers import handler_main_skf
 from app.sofa.handlers import handler_main
@@ -18,7 +18,7 @@ async def set_commands():
 
     commands = [
         BotCommand(command='/start', description='Старт'),
-        BotCommand(command='/anesthetic_risk', description='Оценка операционно - анестезиологического риска'),
+        BotCommand(command='/anesthetic_risk', description='Оценка опер. анестезиологического риска'),
         BotCommand(command='/skf', description='Cкорость клубочковой фильтрации'),
         BotCommand(command='/donor', description='Подбор донора крови'),
         BotCommand(command='/sofa', description='Шкала SOFA')
@@ -31,9 +31,11 @@ async def set_commands():
 async def main():
     # регистрация роутеров
     dp.include_routers(
-        bot_start.user_router,  # команда /start
+        bot_start. user_router,  # команда /start
 
-        handler_anest.anesthesia_router,  # команда /anesthetic risk
+        feedback_project.user_router,  # callback 'Обратная связь'
+
+        handler_main_anest.anesthesia_router,  # команда /anesthetic risk
 
         handler_main_skf.skf_router,  # команда /skf
 

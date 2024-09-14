@@ -1,7 +1,8 @@
 import unittest
 
-from aiogram.types import ReplyKeyboardMarkup
+from aiogram.types import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
 
+from app.skf.inline_kb_skf import inline_kb_skf
 from app.skf.keyboard import kb_skf
 
 
@@ -39,3 +40,19 @@ class TestKb_skf(unittest.TestCase):
         self.assertEqual(len(keyboard.keyboard[0]), 2)
         self.assertEqual(keyboard.keyboard[0][0].text, "Женский")
         self.assertEqual(keyboard.keyboard[0][1].text, "Мужской")
+
+
+class TestInlineKbSkf(unittest.TestCase):
+    def test_inline_kb_skf(self):
+        """
+        Проверяет, что функция 'inline_kb_skf()' возвращает ожидаемый объект InlineKeyboardMarkup.
+        """
+
+        ожидаемая_разметка = InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text='На стартовую', callback_data='/start')],
+            [InlineKeyboardButton(text='Вернуться назад', callback_data='/skf')]
+        ])
+
+        фактическая_разметка = inline_kb_skf()
+
+        self.assertEqual(ожидаемая_разметка, фактическая_разметка)

@@ -3,11 +3,11 @@
 # https://anest-rean.ru/international-scale/mnoar-classification/
 
 
-def get_operate_patient(patient: str) -> int or float:
+def get_operate_patient(patient: str) -> int | float:
     """
     Функция принимает от пользователя ответ (data['patient']),
     сравнивает по условию и возвращает балл
-    :param patient: string data['patient'] (def start_Read_user_dataPatient)
+    :param patient: string
     :return: integer or float
     """
     if patient[:5] == 'удовл':
@@ -26,7 +26,7 @@ def get_operate_operation(operation: str) -> int or float:
     """
     Функция принимает от пользователя ответ (data['operation']),
     сравнивает по условию и возвращает балл
-    :param operation: string data['operation'] (def read_user_dataOperation)
+    :param operation: string
     :return: integer or float
     """
     if operation[:5] == 'малые':
@@ -45,7 +45,7 @@ def get_operate_character(character: str) -> int or float:
     """
     Функция принимает от пользователя ответ (data['character']),
     сравнивает по условию и возвращает балл
-    :param character: string data['character'] (def read_user_dataCharacter)
+    :param character: string
     :return: integer or float
     """
     if character[:5] == 'потен':

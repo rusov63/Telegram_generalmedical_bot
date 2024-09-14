@@ -1,5 +1,5 @@
 # Основная логика Расчета скорости клубочковой фильтрации (SKF)
-
+from aiogram.types import CallbackQuery
 from aiogram import Router, types, F
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
@@ -7,8 +7,9 @@ from aiogram.fsm.state import StatesGroup, State
 
 from app.skf.handlers.calc_GenAgeCreatinin import calc_skf
 from app.skf.handlers.get_gender_user import get_gender
-from app.skf.handlers.get_number_user import get_answer_age_creatinin
-from app.skf.keyboard import kb_skf
+from app.skf.handlers.get_number_creatinine_age import get_answer_age, get_answer_creatinine
+from app.skf.keyboards.inline_kb_skf import inline_skf
+from app.skf.keyboards.reply_kb_skf import reply_skf
 
 skf_router = Router()
 
@@ -41,10 +42,22 @@ async def cmd_skf(message: types.Message, state: FSMContext):
     соответствующую клавиатуру для выбора. Устанавливает состояние
     Reg.gender для ожидания ввода данных о поле пользователя.
     """
+    await state.clear()  # автоматический сброс закрытие сценария заполнения.
+
     await message.answer(f'Выбрали: скорость клубочковой фильтрации для взрослых (CKD-EPI)')
 
     await state.set_state(Reg.gender)  # Установка состояния Reg.gender
-    await message.answer(f'Выберите пол: ', reply_markup=kb_skf())
+    await message.answer(f'Выберите пол: ', reply_markup=reply_skf())
+
+
+@skf_router.callback_query(F.data == '/skf')
+async def start_callback(callback: CallbackQuery, state: FSMContext):
+    await state.clear()
+    await callback.message.answer(f'Выбрали: скорость клубочковой фильтрации для взрослых (CKD-EPI)')
+    await callback.answer(f'Cкорость клубочковой фильтрации')
+
+    await state.set_state(Reg.gender)
+    await callback.message.answer(f'Выберите пол: ', reply_markup=reply_skf())
 
 
 @skf_router.message(F.text, Reg.gender)
@@ -101,11 +114,11 @@ async def reg_age(message: types.Message, state: FSMContext):
     """
 
     # Создаем функцию и получаем число от пользователя.
-    get_check = get_answer_age_creatinin(message.text)
+    get_check_age = get_answer_age(message.text)
 
     # Проверяем на корректность получаемых значений
-    if not get_check or not (18 <= get_check <= 100):
-        await message.reply(f'Пожалуйста, введите корректный возраст (от 18 до 100)!')
+    if get_check_age == None:
+        await message.reply(f'<b>Пожалуйста, введите корректный возраст! (число от 18 до 100)</b>')
         return
 
     # Сохраняет введенное пользователем значение возраст.
@@ -139,11 +152,11 @@ async def reg_creatinin(message: types.Message, state: FSMContext):
     """
 
     # Создаем функцию и получаем число от пользователя.
-    get_check = get_answer_age_creatinin(message.text)
+    get_check_creatinine = get_answer_creatinine(message.text)
 
     # Проверяем на корректность получаемых значений
-    if not get_check or not (0 <= get_check <= 2000):
-        await message.reply(f'Пожалуйста, введите корректный креатинин (от 0 до 2000)')
+    if get_check_creatinine == None:
+        await message.reply(f'<b>Пожалуйста, введите корректный креатинин! (от 0 до 1000)</b>')
         return
 
     # Сохраняет введенное пользователем значение креатинин
@@ -157,8 +170,7 @@ async def reg_creatinin(message: types.Message, state: FSMContext):
 
     # Распечатка полученного результата.
     await message.answer(f'{total}')
-
-    await message.answer(f'Для возврата запустите команду:  /skf \n'
-                         f'или воспользуйтесь меню')
-
     await state.clear()
+
+    # Меню: на стартовую страницу или вернуться назад
+    await message.answer(f'Выберите действие: ', reply_markup=inline_skf())
