@@ -6,7 +6,7 @@ from app.other_files import echo, feedback_project
 from app.anesthetic_risk.handlers import handler_main_anest
 from app.blood_donor.handlers import handler_donor
 from app.skf.handlers import handler_main_skf
-from app.sofa.handlers import handler_main
+from app.sofa.handlers import handler_main_sofa
 
 from config import dp, bot
 
@@ -41,7 +41,7 @@ async def main():
 
         handler_donor.donor_router,  # команда /donor
 
-        handler_main.sofa_router,  # команда /sofa
+        handler_main_sofa.sofa_router,  # команда /sofa
 
         echo.echo_router  # неизвестная команда
     )
