@@ -3,9 +3,11 @@
 # THREE = ('171 - 299')
 # FOUR = ('300 - 440 или диурез <500 мл в сутки')
 # FIVE = ('> 440 или < 200 мл мочи/сутки')
+from functools import lru_cache
+
 
 # Креатинин. Почки
-
+@lru_cache(maxsize=2)
 def calculation_creatinin(user: str) -> int:
     """
     Функция использует генератор списков для извлечения всех числовых символов из строки user.

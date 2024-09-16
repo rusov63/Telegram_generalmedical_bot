@@ -3,7 +3,10 @@
 # THREE = ('33 - 101')
 # FOUR = ('102 - 204')
 # FIVE = ('> 204')
+from functools import lru_cache
 
+
+@lru_cache(maxsize=2)
 def calculation_liver(user: str) -> int:
     """
     Функция сначала извлекает все числовые символы из строки user и объединяет их в одно целое число.

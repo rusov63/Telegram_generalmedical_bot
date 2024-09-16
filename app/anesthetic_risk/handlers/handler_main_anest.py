@@ -66,6 +66,7 @@ async def start_callbacks(callback: CallbackQuery, state: FSMContext):
      :return None
      """
     await state.clear()  # Очистка состояния!
+
     await state.set_state(Reg.patient)  # Установка состояния Reg.patient.
 
     await callback.message.answer(f'Выбрали: оценка операционно-анестезиологического риска (MHOAP-89)')
