@@ -2,6 +2,7 @@ from aiogram import Router, types, F
 from aiogram.filters import CommandStart
 from aiogram.types import CallbackQuery
 from aiogram.utils.markdown import hbold
+from aiogram.fsm.context import FSMContext
 
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
@@ -9,7 +10,7 @@ user_router = Router()
 
 
 @user_router.message(CommandStart())
-async def command_start(message: types.Message):
+async def command_start(message: types.Message, state: FSMContext):
     """
     Функция, которая обрабатывает команду /start, отправленную пользователем.
 
@@ -17,13 +18,15 @@ async def command_start(message: types.Message):
     :return Ничего не возвращает, но отправляет приветственное сообщение пользователю и
     предлагает выбрать команду.
     """
+    await state.clear()  # автоматический сброс закрытие сценария заполнения.
+
     await message.reply(f'Добро пожаловать пользователь, {hbold(message.from_user.full_name)}!')
 
     await message.answer(f'Для начала выберите команду: ', reply_markup=inline_skf())
 
 
 @user_router.callback_query(F.data == '/start')
-async def command(callback: CallbackQuery):
+async def command(callback: CallbackQuery, state: FSMContext):
     """
     Функция, которая обрабатывает нажатие на кнопку со ссылкой на команду /start.
 
@@ -31,6 +34,8 @@ async def command(callback: CallbackQuery):
     :return Ничего не возвращает, но отправляет сообщение с предложением выбрать команду и
     отвечает на callback.
     """
+    await state.clear()  # автоматический сброс закрытие сценария заполнения.
+
     await callback.message.answer(f'Для начала выберите команду: ', reply_markup=inline_skf())
 
     await callback.answer(f'Стартовая')

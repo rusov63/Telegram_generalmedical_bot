@@ -93,7 +93,7 @@ async def operate_with_data(message: types.Message, state: FSMContext):
     """
     await message.bot.send_chat_action(chat_id=message.from_user.id,
                                        action=ChatAction.TYPING)  # отображает то, что бот печатает.
-    await asyncio.sleep()  # время отображения ответа бота.
+    await asyncio.sleep(1)  # время отображения ответа бота.
 
     # проверяем корректность введенных значений от пользователя
     user = СheckСorrectPhenotype(message.text)
