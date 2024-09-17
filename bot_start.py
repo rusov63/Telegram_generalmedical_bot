@@ -52,10 +52,10 @@ def inline_skf() -> InlineKeyboardMarkup:
 
     inline_main = InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text='💉 Оценка опер. анестезиологического риска', callback_data='/anesthetic_risk')],
-        [InlineKeyboardButton(text='💦 Cкорость клубочковой фильтрации', callback_data='/skf')],
+        [InlineKeyboardButton(text='📊 Cкорость клубочковой фильтрации', callback_data='/skf')],
         [InlineKeyboardButton(text='🩸 Подбор донора крови', callback_data='/donor')],
-        [InlineKeyboardButton(text='🧟 Шкала SOFA', callback_data='/sofa')],
-        [InlineKeyboardButton(text='📌 Обратная связь', callback_data='Обратная связь')]
+        [InlineKeyboardButton(text='⚕️ Шкала SOFA', callback_data='/sofa')],
+        [InlineKeyboardButton(text='📩 Обратная связь', callback_data='Обратная связь')]
     ])
 
     return inline_main
