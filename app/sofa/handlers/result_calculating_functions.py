@@ -1,3 +1,7 @@
+from functools import lru_cache
+
+
+@lru_cache(maxsize=5)
 def total_result_functions(total_PaoFio, total_respiratory,
                            total_platelet, total_liver,
                            total_kidney, total_hypotension,
@@ -14,11 +18,9 @@ def total_result_functions(total_PaoFio, total_respiratory,
     :param total_EyeVerbalMotor: Значение функции глазного, вербального и моторного ответа (float или int).
 
     :return: Строка с общим количеством баллов и соответствующей оценкой смертности.
-             Если входные данные некорректны, возвращает сообщение об ошибке.
        """
-    if total_PaoFio is None or not isinstance(total_PaoFio, (int, float)):
-        return f'<b>Ошибка, повторите еще раз!</b>'
-
+    # if total_PaoFio is None or not isinstance(total_PaoFio, (int, float)):
+    #     return f'<b>Ошибка, повторите еще раз!</b>'
 
     total_functions = int(total_PaoFio + total_respiratory +
                           total_platelet + total_liver +
@@ -44,9 +46,6 @@ def total_result_functions(total_PaoFio, total_respiratory,
 
     elif 16 <= total_functions <= 24:
         points = f'<b>Баллов: {total_functions} \nСмертность: &gt; 90%</b>'
-
-    else:
-        points = f'<b>Ошибка, повторите еще раз!</b>'
 
     return f'{points}'
 

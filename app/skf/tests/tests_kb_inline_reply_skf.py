@@ -2,8 +2,8 @@ import unittest
 
 from aiogram.types import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
 
-from app.skf.inline_kb_skf import inline_kb_skf
-from app.skf.keyboard import kb_skf
+from app.skf.keyboards.inline_kb_skf import inline_skf
+from app.skf.keyboards.reply_kb_skf import reply_skf
 
 
 class TestKb_skf(unittest.TestCase):
@@ -28,7 +28,7 @@ class TestKb_skf(unittest.TestCase):
         - Текст кнопок соответствует ожидаемым значениям 'Женский' и 'Мужской'.
         """
 
-        keyboard = kb_skf()
+        keyboard = reply_skf()
 
         self.assertIsInstance(keyboard, ReplyKeyboardMarkup)
         self.assertTrue(keyboard.resize_keyboard)
@@ -49,10 +49,10 @@ class TestInlineKbSkf(unittest.TestCase):
         """
 
         ожидаемая_разметка = InlineKeyboardMarkup(inline_keyboard=[
-            [InlineKeyboardButton(text='На стартовую', callback_data='/start')],
-            [InlineKeyboardButton(text='Вернуться назад', callback_data='/skf')]
+            [InlineKeyboardButton(text='🚀 На стартовую', callback_data='/start')],
+            [InlineKeyboardButton(text='🔙 Вернуться назад', callback_data='/skf')]
         ])
 
-        фактическая_разметка = inline_kb_skf()
+        фактическая_разметка = inline_skf()
 
         self.assertEqual(ожидаемая_разметка, фактическая_разметка)

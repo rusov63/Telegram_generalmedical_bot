@@ -1,7 +1,7 @@
-# ONE = ('Да')
-# TWO = ('Нет')
+from functools import lru_cache
 
 
+@lru_cache(maxsize=2)
 def calculation_respiratory(respiratory):
     """
     Функция предназначена для вычисления количества очков на основе ответа
@@ -16,9 +16,8 @@ def calculation_respiratory(respiratory):
         points = 1
     elif respiratory == 'Нет':
         points = 0
-    else:
-        raise ValueError("Некорректный ввод: введите 'Да' или 'Нет'")
-
+    # else:
+    #     raise ValueError("Некорректный ввод: введите 'Да' или 'Нет'")
     return points
 
 

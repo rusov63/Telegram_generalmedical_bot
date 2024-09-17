@@ -2,40 +2,52 @@ import asyncio
 from config import db_manager
 
 
-async def get_table_donor(recipient: str, table_name='donor') -> None or str:
+async def get_table_donor(recipient: str, table_name='donor') -> str:
     """
-    Функция, которая достает данные из таблицы.
-    :param recipient: Поиск в столбце recipient из table donor.
-    :param table_name: Таблица - donor из БД Medical.
-    :return: Возвращает None если список пустой (введены не корректные данные), иначе
-    возвращает ответ str.
+    Получает информацию о доноре, совместимом с указанным реципиентом, из базы данных.
+
+    :param:
+    - recipient (str): Идентификатор реципиента, для которого необходимо найти
+      совместимого донора.
+    - table_name (str): Название таблицы в базе данных, из которой будет
+      извлекаться информация. По умолчанию используется 'donor'.
+
+    :return:
+    - None: Если информация о доноре не найдена.
+    - str: Форматированная строка с информацией о совместимом фенотипе и
+      показаниях к трансфузии.
+
+    Описание работы функции:
+    1. Устанавливает асинхронное соединение с менеджером базы данных.
+    2. Извлекает данные о совместимых донорах, соответствующих указанному
+       реципиенту, включая совместимый фенотип и показания.
+    3. Преобразует полученные данные в обычный список.
+    4. Форматирует и возвращает строку с информацией о совместимом фенотипе и
+       экстренных показаниях к трансфузии.
+
+    Пример использования:
+    recipient = 'CcDee'
+    result = await get_table_donor(recipient)
     """
-    RESIPIENT = ('CcDee', 'CCDee', 'CcDEe', 'ccddee', 'ccDEe', 'CwCDee', 'ccDEE', 'CwcDee', 'ccDee',
-                 'Ccddee', 'CwcDEe', 'ccDweakee', 'CcddEe', 'CCDEe', 'ccddEe', 'CcDEE', 'Cwcddee',
-                 'CCddee', 'CCDEE', 'CCddEe', 'CcddEE', 'ccddEE', 'CCDweakee', 'CcDweakee', 'ccDweakEe',
-                 'ccDweakEE', 'CwcddEe', 'CwcDEE', 'kk', 'Kk', 'KK')
+    async with db_manager:
+        info = await db_manager.select_data(table_name=table_name,
+                                            where_dict=[{'recipient': recipient}],
+                                            columns=['compatible', 'indications'],
+                                            one_dict=False)
 
-    if recipient not in RESIPIENT:
-        return f'<b>Ошибка, такой фенотип не существует!</b>'
+    # if not info:
+    #     return None  # Возвращаем None, если данных нет
 
-    else:
-        async with db_manager:
-            info = await db_manager.select_data(table_name=table_name,
-                                                where_dict=[{'recipient': recipient}],
-                                                columns=['compatible', 'indications'],
-                                                one_dict=False)
+    recipient_list = sum([list(d.values()) for d in info], [])
 
-        recipient_list = sum([list(d.values()) for d in info], [])  # из вложенного списка
-        # превращаем в обычный список
+    return (f'Cовместимый фенотип: \n'
+            f'<b>{recipient_list[0].strip()}</b> \n'
+            f'\n'
+            f'При экстренных показаниях к трансфузии (переливанию): \n'
+            f'<b>{recipient_list[1].strip()}</b>')
 
-        return (f'Cовместимый фенотип: \n'
-                f'<b>{recipient_list[0]}</b> \n'
-                f'\n'
-                f'При экстренных показаниях к трансфузии (переливанию): \n'
-                f'<b>{recipient_list[1]}</b>')
-
-#recipient = 'CcDee'
-#recipient = '1'
+# recipient = 'CcDee'
+# #recipient = '1'
 # asyncio.run(get_table_donor(recipient))
 
 # [{'compatible': 'CcDee CCDee ccddee ccDee Ccddee    ', 'indications': 'отсутствуют              '}]
