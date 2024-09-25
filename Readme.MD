@@ -33,8 +33,11 @@
 
 
 #### Стэк
+- Для хранилища данных используется Redis storage в FSM, тем самым обеспечивает 
+  высокую производительность и надежность сохраняемых данных.
+- Собран и запущен Docker container c Redis
 - Проект на 90% покрыт тестами с использованием unittest.
 
 - Python 3.12, aiogram==3.10, asyncpg, asyncpg-lite, psycopg2-binary, python-dotenv, SQLAlchemy,
-  PostgreSQL, unittest, coverage, docker
+  PostgreSQL, unittest, coverage, Docker, Redis
 
