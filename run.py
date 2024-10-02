@@ -8,9 +8,19 @@ from app.blood_donor.handlers import handler_donor
 from app.skf.handlers import handler_main_skf
 from app.sofa.handlers import handler_main_sofa
 
-from config import dp, bot
+from config import dp, bot, ADMIN_ID
 
 from aiogram.types import BotCommand, BotCommandScopeDefault
+
+
+async def on_startup():
+    await bot.send_message(chat_id=ADMIN_ID, text=f'🤩 Бот запущен!')
+
+
+async def on_shutdown():
+    await bot.send_message(chat_id=ADMIN_ID, text=f'🤨 Внимание, бот остановлен!')
+    # Закрываем сессию бота, освобождая ресурсы
+    await bot.session.close()
 
 
 async def set_commands():
@@ -27,11 +37,12 @@ async def set_commands():
     await bot.set_my_commands(commands, BotCommandScopeDefault())
 
 
-
 async def main():
     # регистрация роутеров
+
     dp.include_routers(
-        bot_start. user_router,  # команда /start
+
+        bot_start.user_router,  # команда /start
 
         feedback_project.user_router,  # callback 'Обратная связь'
 
@@ -46,9 +57,16 @@ async def main():
         echo.echo_router  # неизвестная команда
     )
 
-    await dp.start_polling(bot)
+    # Регистрируем функцию, которая будет вызвана при старте бота
+    dp.startup.register(on_startup)
+
+    # Регистрируем функцию, которая будет вызвана при остановке бота
+    dp.shutdown.register(on_shutdown) # Ctrl-C для остановки бота и вывода сообщения
 
     await set_commands()  # Командное меню.
+
+    await dp.start_polling(bot)
+
 
 
 if __name__ == '__main__':

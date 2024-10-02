@@ -28,3 +28,5 @@ storage = RedisStorage.from_url(os.getenv('REDIS_URL'))
 
 # инициируем объект бота
 dp = Dispatcher(storage=storage)
+
+ADMIN_ID=int(os.getenv('ADMIN_ID'))
